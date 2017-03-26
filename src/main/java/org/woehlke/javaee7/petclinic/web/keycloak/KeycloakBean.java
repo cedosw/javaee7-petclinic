@@ -137,8 +137,12 @@ public class KeycloakBean {
 		return (RefreshableKeycloakSecurityContext) httpRequest.getAttribute(KeycloakSecurityContext.class.getName());
 	}
 
-	private AccessToken getAccessToken() {
+	public AccessToken getAccessToken() {
 		return getCurrentKeycloakSecurityContext().getToken();
+	}
+
+	public String getAccessTokenString() {
+		return getCurrentKeycloakSecurityContext().getTokenString();
 	}
 
 	private IDToken getIdToken() {

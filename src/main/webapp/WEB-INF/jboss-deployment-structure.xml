@@ -3,6 +3,7 @@
     <deployment>
         <dependencies>
             <module name="org.apache.httpcomponents"  services="import"/>
+            <module name="org.apache.commons.io"  services="import"/>
         </dependencies>
     </deployment>
 </jboss-deployment-structure>
