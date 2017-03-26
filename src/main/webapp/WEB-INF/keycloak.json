@@ -1,0 +1,10 @@
+{
+  "realm": "javaland",
+  "auth-server-url": "http://sso.tdlabs.local:8899/u/auth",
+  "ssl-required": "external",
+  "resource": "app-javaee-petclinic",
+  "credentials": {
+    "secret": "82753541-7fbb-4272-bb6a-e10fb82dfccd"
+  },
+  "use-resource-role-mappings": true
+}

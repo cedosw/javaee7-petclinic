@@ -89,8 +89,27 @@
 </h:head>
 <h:body>
 <div class="container">
-
     <h2><h:outputText value="Java EE 7 Petclinic"/></h2>
+
+ <div>
+ <!-- Begin Keycloak Auth information -->
+    <div>User: <span>#{keycloak.username}</span></div>
+    <div>User ID: <span>#{keycloak.userId}</span></div>
+    <div>User Full Name: <span>#{keycloak.userDisplayName}</span></div>
+    <div>Client Roles: <span>#{keycloak.roles}</span></div>
+    <div>Realm Roles: <span>#{keycloak.realmRoles}</span></div>
+    <div>Sibling Client Roles:<span>#{keycloak.siblingRoles}</span></div>
+    <div>User Custom Attributes: <span>#{keycloak.customAttributes}</span></div>
+    <ul>
+        <li><a href="#{keycloak.accountUri}">account</a></li>
+        <li>
+            <h:form>
+            <h:commandLink id="logoutLink" value="Logout" action="#{keycloak.logout}"/>
+            </h:form>
+        </li>
+    </ul>
+<!-- End Keycloak Auth information -->
+</div>
 
         <div class="masthead">
             <ul class="nav nav-justified">
