@@ -1,24 +1,28 @@
 package org.woehlke.javaee7.petclinic.web.keycloak;
 
-import org.keycloak.adapters.servlet.KeycloakOIDCFilter;
+import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by tom on 21.02.16.
- */
+import org.jboss.logging.Logger;
+import org.keycloak.adapters.servlet.KeycloakOIDCFilter;
+
 @WebFilter(value = "/*", asyncSupported = true)
 public class KeycloakSsoFilter extends KeycloakOIDCFilter {
 
-    @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+	private static final Logger LOG = Logger.getLogger(KeycloakSsoFilter.class);
 
-        //overridden to ease setting breakpoints
-        super.doFilter(req, res, chain);
-    }
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+			throws IOException, ServletException {
+
+		LOG.infof("Filtering request: %s", ((HttpServletRequest) req).getRequestURI());
+
+		super.doFilter(req, res, chain);
+	}
 }

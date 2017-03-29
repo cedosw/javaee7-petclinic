@@ -22,15 +22,10 @@ public class GreetingFacade {
 	public String greet(String name) {
 
 		HttpGet greetingRequest = new HttpGet("http://apps.tdlabs.local:20000/api/user/greet");
-		String accessToken = keycloak.getAccessTokenString();
-		greetingRequest.addHeader("Authorization", "Bearer " + accessToken);
-
-		RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
-		requestConfigBuilder = requestConfigBuilder.setConnectTimeout(1000);
-		requestConfigBuilder = requestConfigBuilder.setConnectionRequestTimeout(1000);
+		greetingRequest.addHeader("Authorization", "Bearer " + keycloak.getAccessTokenString());
 
 		try (CloseableHttpClient client = HttpClientBuilder.create() //
-				.setDefaultRequestConfig(requestConfigBuilder.build()) //
+				.setDefaultRequestConfig(newRequestConfigWithDefaultTimeouts()) //
 				.setUserAgent("javaee7-petclinic") //
 				.build()) {
 			try (CloseableHttpResponse response = client.execute(greetingRequest)) {
@@ -41,5 +36,22 @@ public class GreetingFacade {
 		} catch (Exception ex) {
 			return "Fallback greeting for " + name;
 		}
+	}
+
+
+
+
+
+
+
+
+
+	private RequestConfig newRequestConfigWithDefaultTimeouts() {
+
+		RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
+		requestConfigBuilder = requestConfigBuilder.setConnectTimeout(1000);
+		requestConfigBuilder = requestConfigBuilder.setConnectionRequestTimeout(1000);
+		RequestConfig requestConfig = requestConfigBuilder.build();
+		return requestConfig;
 	}
 }
